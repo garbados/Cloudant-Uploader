@@ -26,6 +26,7 @@ function Uploader(opts){
   // to upload the given docs as a group
   function batch(docs){
     return function(done){
+      console.log("Uploading " + docs.length + " docs...");
       db.bulk({docs: docs}, done);
     };
   }
@@ -46,6 +47,7 @@ function Uploader(opts){
   };
 }
 
+// main upload function :D
 function upload(opts){
   var uploader = Uploader(opts);
   fs.readFile(config.csv, function(err, data){
@@ -56,25 +58,24 @@ function upload(opts){
         });
 
     // run all our upload batches in parallel
-    async.parallel(jobs, function(err, results){
+    async.parallelLimit(jobs, 8, function(err, results){
       if (err) {
         console.log(err);
         throw new Error(err);
       } else {
         // get any docs we couldn't upload
-        var problem_docs = _.flatten(results.map(function(result){
-          return result.filter(function(doc){
-            if(doc.error){
-              return doc;
-            }
-          });
-        }));
+        var doc_results = _.flatten(results.map(function(result){
+              return result[0];
+            })),
+            problem_docs = doc_results.filter(function(doc){
+              return doc.error;
+            });
         // if any docs had problems, throw a tantrum
         if (problem_docs.length > 0) {
           console.log(problem_docs);
           throw new Error("Some docs had problems :(");
         } else {
-          console.log("Uploaded " + _.flatten(results).length + " docs.");
+          console.log("Done! Uploaded " + doc_results.length + " docs.");
         }
       }
     });

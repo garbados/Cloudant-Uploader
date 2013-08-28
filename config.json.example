@@ -4,5 +4,5 @@
   "user": "...",
   "api_key": "...",
   "api_secret": "...",
-  "chunk_size": 10000
+  "chunk_size": 5000
 }
