@@ -1,0 +1,17 @@
+{
+  "name": "nodejsuploader",
+  "version": "0.0.0",
+  "description": "upload csvs to cloudant using nodejs",
+  "main": "app.js",
+  "dependencies": {
+    "nano": "~4.1.1",
+    "async": "~0.2.9",
+    "underscore": "~1.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "max thayer (max@cloudant.com)",
+  "license": "MIT"
+}

@@ -1,0 +1,8 @@
+{
+  "csv": "path/to/file.csv",
+  "db": "...",
+  "user": "...",
+  "api_key": "...",
+  "api_secret": "...",
+  "chunk_size": 10000
+}
