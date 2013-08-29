@@ -6,8 +6,8 @@ Converts CSV rows into JSON documents, and uploads them to Cloudant. Built using
 
 First, make sure you have [node.js][1] installed. Then:
 
-    git clone [repo]
-    cd [repo]
+    git clone git@github.com:garbados/Cloudant-Uploader.git
+    cd Cloudant-Uploader
     npm install
 
 ## Usage
